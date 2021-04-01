@@ -3,6 +3,7 @@ import NowPlayingView from './NowPlayingView';
 import TrendingView from './TrendingView';
 import SearchView from './SearchView';
 import Header from './Header';
+
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import 'fontsource-roboto';
 

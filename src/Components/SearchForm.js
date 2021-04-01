@@ -4,7 +4,6 @@ import TextField from '@material-ui/core/TextField';
 
 class SearchForm extends Component {
   render() {
-    console.log('search form props', this.props);
     return (
       <div>
         <form noValidate autoComplete="off">

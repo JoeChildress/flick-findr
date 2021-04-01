@@ -4,6 +4,7 @@ import ResultsList from './ResultsList';
 import Typography from '@material-ui/core/Typography';
 import instance from '../util/MovieApi';
 import requests from '../util/requests';
+import MovieModal from './MovieModal';
 
 class SearchView extends Component {
   constructor(props) {
@@ -13,10 +14,12 @@ class SearchView extends Component {
       waiting: false,
       searchError: false,
       query: '',
-      selectedMovie: {},
+      selectedMovie: false,
     };
     this.search = this.search.bind(this);
     this.setQuery = this.setQuery.bind(this);
+    this.handleItemClick = this.handleItemClick.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
   render() {
     return (
@@ -28,21 +31,41 @@ class SearchView extends Component {
           searchData={this.state.searchResult}
           waiting={this.state.waiting}
           error={this.state.error}
+          handleItemClick={this.handleItemClick}
+        />
+        <MovieModal
+          selectedMovie={this.state.selectedMovie}
+          handleCloseModal={this.handleCloseModal}
         />
       </div>
     );
   }
+  handleItemClick(id) {
+    let data = this.getSelectedMovie(id);
+    this.setState({
+      selectedMovie: data,
+      showModal: true,
+    });
+  }
+
+  handleCloseModal() {
+    this.setState({ selectedMovie: false });
+  }
+
+  getSelectedMovie(id) {
+    if (!id) return;
+    let movieData =
+      this.state.searchResult.filter((movie) => movie.id === id)[0] || {};
+    return movieData;
+  }
 
   setQuery(value) {
-    console.log('query', this.state.query);
     this.setState({ query: value });
   }
   async search() {
-    console.log('search is happening');
     const response = await instance.get(
       requests.search + '&query=' + this.state.query
     );
-    console.log('search data', response);
     this.setState({ searchResult: response.data.results });
   }
 }

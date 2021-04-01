@@ -76,7 +76,9 @@ const Header = (props) => {
           </Menu>
 
           <Typography variant="h6" className={classes.title}>
-            Flick-Findr
+            <div id="title" onClick={() => handleMenuClick('/')}>
+              Flick-Findr
+            </div>
           </Typography>
         </Toolbar>
       </AppBar>

@@ -10,7 +10,7 @@ import TheatersIcon from '@material-ui/icons/Theaters';
 
 class ResultsList extends Component {
   render() {
-    console.log('Results list props:', this.props);
+    //console.log('Results list props:', this.props);
     const renderResultsSection = () => {
       // if (this.props.searchData.length <= 0 && !this.props.error) {
       //   return <CircularProgress />;
@@ -24,7 +24,7 @@ class ResultsList extends Component {
               <ListItem
                 button
                 // selected={selectedIndex === 0}
-                onClick={(event) => alert('list item clicked')}
+                onClick={(event) => this.props.handleItemClick(data.id)}
                 key={data.id}
               >
                 <ListItemIcon>
