@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import { getYear } from '../util/helpers';
+import MovieCard from './MovieCard';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -30,30 +30,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function MovieModal(props) {
-  const classes = useStyles();
-  const [modalStyle] = React.useState(getModalStyle);
-  //const [open, setOpen] = React.useState(!!props.selectedMovie);
+  // const classes = useStyles();
+  // const [modalStyle] = React.useState(getModalStyle);
   const handleClose = () => {
-    //setOpen(false);
     props.handleCloseModal();
   };
   const movie = props.selectedMovie;
-  // console.log('movie data in modal', movie);
   if (movie) {
-    const baseImgPath = 'https://image.tmdb.org/t/p/w200/';
-    const missingImg =
-      'https://cdn4.vectorstock.com/i/thumb-large/19/58/no-image-vector-30371958.jpg';
-    const imgSrc = movie.poster_path
-      ? baseImgPath + movie.poster_path
-      : missingImg;
-    const body = (
-      <div style={modalStyle} className={classes.paper}>
-        <img src={imgSrc}></img>
-        <h2 id="simple-modal-title">{movie.title}</h2>
-        <p id="simple-modal-description">{getYear(movie.release_date)}</p>
-        <p id="simple-modal-description">{movie.overview}</p>
-      </div>
-    );
     return (
       <div>
         <Modal
@@ -62,7 +45,7 @@ function MovieModal(props) {
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
         >
-          {body}
+          <MovieCard movie={movie} />
         </Modal>
       </div>
     );
